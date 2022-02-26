@@ -1,6 +1,8 @@
 const express = require('express'); // no file path 'cus this is a core module dude
 const morgan = require('morgan');
 const campsiteRouter = require('./routes/campsiteRouter');
+const promotionRouter = require('./routes/promotionRouter');
+const partnerRouter = require('./routes/partnerRouter');
 const hostname = 'localhost';
 const port = 3000;
 
@@ -9,7 +11,9 @@ const app = express(); // calls the express function which gives us a server, no
 app.use(morgan('dev')); // dev causes morgan to log using the development version, which logs additional info to the screen
 app.use(express.json()); // parses JSON data into JS properties so we can use the data
 
-app.use('/campsites', campsiteRouter); // here we provide the ROOT path for campsiteRouter and that is why we don't need to specify it in campsiteRouter.js under campsiteRouter.route('/')
+app.use('/campsites', campsiteRouter)
+.use('/promotions', promotionRouter)
+.use('/partners', partnerRouter); // here we provide the ROOT path for campsiteRouter and that is why we don't need to specify it in campsiteRouter.js under campsiteRouter.route('/')
 
 // IMPORTANT: see commit history - we moved our routing methods FROM here, into campsiteRouter.js
 
